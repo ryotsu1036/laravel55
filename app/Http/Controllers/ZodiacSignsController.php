@@ -50,7 +50,9 @@ class ZodiacSignsController extends Controller
     public function show($id)
     {
         $zodiacSign = ZodiacSign::find($id);
-        $contents = Content::where('zodiac_sign_id', $id)->paginate('4');
+        $contents = Content::where('zodiac_sign_id', $id)
+            ->orderBy('created_at', 'desc')
+            ->paginate('12');
 
         return view('zodiac_signs.show', compact('zodiacSign', 'contents'));
     }
